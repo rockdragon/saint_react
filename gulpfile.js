@@ -15,9 +15,11 @@ gulp.task('clean', function () {
 gulp.task('build', function () {
     gulp.src('./client/html/index.html')
         .pipe(gulp.dest('./server/assets/'));
+    gulp.src('./client/css/style.css')
+        .pipe(gulp.dest('./server/assets/'));
     return gulp.src('./client/js/entry.js')
         .pipe(webpack({
-            watch: true,
+            watch: false,
             module: {
                 loaders: [
                     {test: /\.css$/, loader: 'style!css'},
@@ -33,8 +35,10 @@ gulp.task('serve', shell.task([
     'cd server && npm start && cd ..'
 ]));
 
-gulp.task('watch', function (callback) {
-    runSequence('clean', 'build', callback);
+gulp.task('watch', function () {
+    watch(['./client/**/*'], function () {
+        runSequence('clean', 'build');
+    });
 });
 
 gulp.task('default', ['serve']);

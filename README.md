@@ -6,12 +6,11 @@
 ```shell
 npm install -g webpack
 npm install -g gulp
-npm install -g grunt
 ```
 
 2) 下载 各种包
 ```shell
-cd client && npm install && cd ..
+npm install
 cd server && npm install && cd ..
 ```
 
