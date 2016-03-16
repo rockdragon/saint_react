@@ -20,6 +20,9 @@ gulp.task('build', function () {
     return gulp.src('./client/js/entry.js')
         .pipe(webpack({
             watch: false,
+            output: {
+                filename: 'bundle.js'
+            },
             module: {
                 loaders: [
                     {test: /\.css$/, loader: 'style!css'},
