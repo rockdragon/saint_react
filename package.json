@@ -1,0 +1,24 @@
+{
+  "name": "saint_react",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "start": "gulp default",
+    "dev": "gulp watch"
+  },
+  "dependencies": {
+    "react": "^0.14.7",
+    "react-dom": "^0.14.7"
+  },
+  "devDependencies": {
+    "del": "2.2.0",
+    "gulp": "3.9.1",
+    "gulp-shell": "^0.5.2",
+    "gulp-watch": "^4.3.5",
+    "gulp-webpack": "^1.5.0",
+    "run-sequence": "1.1.5",
+    "css-loader": "^0.23.1",
+    "jsx-loader": "^0.13.2",
+    "style-loader": "^0.13.0"
+  }
+}
