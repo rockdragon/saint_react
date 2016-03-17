@@ -1,6 +1,8 @@
-var Hello = require('../components/hello');
+var React = require('react');
+var ReactDOM = require('react-dom');
+var MessageBoard = require('../components/messageBoard');
 
-Hello.render(
-    document.getElementById('container'),
-    'Jack',
-    '/api/data');
+ReactDOM.render(
+    <MessageBoard url='/api/message' />,
+    document.getElementById('container')
+);
