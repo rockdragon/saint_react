@@ -4,7 +4,12 @@ var MessageList = React.createClass({
         var messages = this.props.data.map(function (message, index) {
             return (
                 <li key={index}>
-                    {message.name} said: {message.message}
+                    {message.name} said:
+                    <blockquote>
+                        <p>
+                            {message.message}
+                        </p>
+                    </blockquote>
                 </li>
             );
         });

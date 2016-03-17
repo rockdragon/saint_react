@@ -1,3 +1,15 @@
-body {
-    background: yellow;
+blockquote {
+    border-left:0px;
+    margin:0 0.5em;
+    padding:0 1.5em;
+    background: url(/images/quotel.gif) no-repeat 2px 4px;
+}
+blockquote p {
+    display: inline;
+    padding: 0 18px 0 0;
+    line-height: 1.38;
+    font-size: 1.1em;
+    background: url(/images/quoter.gif) no-repeat right bottom;
+    word-wrap: break-word;
+    white-space: pre-wrap;
 }
