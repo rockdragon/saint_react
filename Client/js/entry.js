@@ -3,6 +3,8 @@ var ReactDOM = require('react-dom');
 var MessageBoard = require('../components/messageBoard');
 
 ReactDOM.render(
-    <MessageBoard url='/api/message' />,
+    <MessageBoard
+        url='/api/message'
+        title='留言板' />,
     document.getElementById('container')
 );

@@ -8,15 +8,19 @@ var shell = require('gulp-shell');
 
 // cleanup
 gulp.task('clean', function () {
-    return del('./server/public/assets')
+    return del([
+        './server/assets/dist/bundle.js',
+        './server/assets/dist/style.css',
+        './server/assets/index.html'
+    ]);
 });
 
 // build
 gulp.task('build', function () {
     gulp.src('./client/html/index.html')
-        .pipe(gulp.dest('./server/assets/'));
+        .pipe(gulp.dest('./server/assets'));
     gulp.src('./client/css/style.css')
-        .pipe(gulp.dest('./server/assets/'));
+        .pipe(gulp.dest('./server/assets/dist/'));
     return gulp.src('./client/js/entry.js')
         .pipe(webpack({
             watch: false,
@@ -30,7 +34,7 @@ gulp.task('build', function () {
                 ]
             }
         }))
-        .pipe(gulp.dest('./server/assets/'));
+        .pipe(gulp.dest('./server/assets/dist/'));
 });
 
 // serve
