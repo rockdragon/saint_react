@@ -13,3 +13,7 @@ blockquote p {
     word-wrap: break-word;
     white-space: pre-wrap;
 }
+
+#messageList li span{
+    font-size:1.1em;
+}

@@ -1,18 +1,15 @@
 var gulp = require('gulp');
 var path = require('path');
-var del = require('del');
 var runSequence = require('run-sequence');
 var watch = require('gulp-watch');
 var webpack = require('gulp-webpack');
 var shell = require('gulp-shell');
+var rimraf = require('gulp-rimraf');
 
 // cleanup
 gulp.task('clean', function () {
-    return del([
-        './server/assets/dist/bundle.js',
-        './server/assets/dist/style.css',
-        './server/assets/index.html'
-    ]);
+    return gulp.src('./server/assets', {read:false})
+        .pipe(rimraf());
 });
 
 // build
@@ -42,10 +39,14 @@ gulp.task('serve', shell.task([
     'cd server && npm start && cd ..'
 ]));
 
+gulp.task('rebuild',function() {
+    runSequence('clean', 'build');
+});
+
 gulp.task('watch', function () {
     watch(['./client/**/*'], function () {
         runSequence('clean', 'build');
     });
 });
 
-gulp.task('default', ['serve']);
+gulp.task('default', ['rebuild', 'serve']);
