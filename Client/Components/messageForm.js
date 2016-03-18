@@ -20,9 +20,6 @@ var MessageForm = React.createClass({
         this.props.onMessageSubmit({name: name, message: message});
         this.setState({name: '', message: ''});
     },
-    componentDidMount: function () {
-
-    },
     render: function () {
         return (
             <div className="row">

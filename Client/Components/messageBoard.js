@@ -5,7 +5,23 @@ var MessageBoard = React.createClass({
     getInitialState: function () {
         return {data: []};
     },
+    componentWillMount: function () {
+        console.log('[lifecycle]:', 'componentWillMount');
+    },
+    componentWillReceiveProps: function () {
+        console.log('[lifecycle]:', 'componentWillReceiveProps');
+    },
+    componentWillUpdate: function (nextProps, nextState) {
+        console.log('[lifecycle]:', 'componentWillUpdate', [].slice.call(arguments));
+    },
+    componentDidUpdate: function (prevProps, prevState) {
+        console.log('[lifecycle]:', 'componentDidUpdate', [].slice.call(arguments));
+    },
+    componentWillUnmount: function () {
+        console.log('[lifecycle]:', 'componentWillUnmount', [].slice.call(arguments));
+    },
     componentDidMount: function () {
+        console.log('[lifecycle]:', 'componentDidMount');
         $.ajax({
             url: this.props.url,
             dataType: 'json',
