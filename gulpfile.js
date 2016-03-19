@@ -28,7 +28,7 @@ gulp.task('build', function () {
                 loaders: [
                     {test: /\.css$/, loader: 'style!css'},
                     {
-                        test: /\.js$/,
+                        test: /\.jsx?$/,
                         loader: 'babel-loader',
                         exclude: /node_modules/,
                         query: {
