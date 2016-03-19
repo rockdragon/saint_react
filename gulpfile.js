@@ -27,7 +27,15 @@ gulp.task('build', function () {
             module: {
                 loaders: [
                     {test: /\.css$/, loader: 'style!css'},
-                    {test: /\.js|jsx$/, loader: 'jsx?harmony'}
+                    {
+                        test: /\.js$/,
+                        loader: 'babel-loader',
+                        exclude: /node_modules/,
+                        query: {
+                            cacheDirectory: true,
+                            presets: ['es2015', 'react']
+                        }
+                    }
                 ]
             }
         }))
