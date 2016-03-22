@@ -68,7 +68,7 @@ var MessageBoard = React.createClass({
         );
     }
 });
-// 这里的 state 是 Connect 的组件的
+// mapStateToProps
 function select(state) {
     return {
         messages: state.messages
