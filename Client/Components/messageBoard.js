@@ -1,34 +1,25 @@
-var React = require('react');
-var MessageList = require('./messageList');
-var MessageForm = require('./messageForm');
+import React from 'react'
+import { connect } from 'react-redux'
+import MessageList from './messageList'
+import MessageForm from './messageForm'
+import {addMessage} from '../flux/actions'
 var MessageBoard = React.createClass({
     getInitialState: function () {
         return {data: []};
     },
-    componentWillMount: function () {
-        console.log('[lifecycle]:', 'componentWillMount');
-    },
-    componentWillReceiveProps: function () {
-        console.log('[lifecycle]:', 'componentWillReceiveProps');
-    },
-    componentWillUpdate: function (nextProps, nextState) {
-        console.log('[lifecycle]:', 'componentWillUpdate', [].slice.call(arguments));
-    },
-    componentDidUpdate: function (prevProps, prevState) {
-        console.log('[lifecycle]:', 'componentDidUpdate', [].slice.call(arguments));
-    },
-    componentWillUnmount: function () {
-        console.log('[lifecycle]:', 'componentWillUnmount', [].slice.call(arguments));
+    shouldComponentUpdate(nextProps, nextState){
+        console.log('shouldComponentUpdate', nextProps, nextState);
+        return true;
     },
     componentDidMount: function () {
-        console.log('[lifecycle]:', 'componentDidMount');
         $.ajax({
             url: this.props.url,
             dataType: 'json',
             method: 'get',
             cache: false,
             success: function (data) {
-                this.setState({data: data});
+                //this.setState({data: messages});
+                this.props.dispatch(addMessage(data));
             }.bind(this),
             error: function (xhr, status, err) {
                 console.log(this.props.url, status, err.toString());
@@ -42,7 +33,8 @@ var MessageBoard = React.createClass({
             method: 'post',
             data: message,
             success: function (data) {
-                this.setState({data: data});
+                this.props.dispatch(addMessage(data));
+                //this.setState({data: data});
             }.bind(this),
             error: function (xhr, status, err) {
                 console.log(this.props.url, status, err.toString());
@@ -50,6 +42,7 @@ var MessageBoard = React.createClass({
         });
     },
     render: function () {
+        const {title, messages} = this.props;
         return (
             <div className="container-fluid">
                 <div className="row">
@@ -60,10 +53,10 @@ var MessageBoard = React.createClass({
                             <div className="col-md-4" id="messageBoard">
                                 <div className="row">
                                     <div className="col-md-12">
-                                        <h3>{this.props.title}</h3>
+                                        <h3>{title}</h3>
                                     </div>
                                 </div>
-                                <MessageList data={this.state.data}/>
+                                <MessageList data={messages}/>
                                 <MessageForm onMessageSubmit={this.handleMessageSubmit}/>
                             </div>
                             <div className="col-md-4">
@@ -75,4 +68,10 @@ var MessageBoard = React.createClass({
         );
     }
 });
-module.exports = MessageBoard;
+// 这里的 state 是 Connect 的组件的
+function select(state) {
+    return {
+        messages: state.messages
+    };
+}
+export default connect(select)(MessageBoard);

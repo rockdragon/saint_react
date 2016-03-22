@@ -1,4 +1,4 @@
-var React = require('react');
+import React from 'react'
 var MessageForm = React.createClass({
     getInitialState: function () {
         return {name: '', message: ''};
@@ -83,4 +83,4 @@ var MessageForm = React.createClass({
         );
     }
 });
-module.exports = MessageForm;
+export default MessageForm;
