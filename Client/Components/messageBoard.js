@@ -7,10 +7,6 @@ var MessageBoard = React.createClass({
     getInitialState: function () {
         return {data: []};
     },
-    shouldComponentUpdate(nextProps, nextState){
-        console.log('shouldComponentUpdate', nextProps, nextState);
-        return true;
-    },
     componentDidMount: function () {
         $.ajax({
             url: this.props.url,
@@ -18,7 +14,6 @@ var MessageBoard = React.createClass({
             method: 'get',
             cache: false,
             success: function (data) {
-                //this.setState({data: messages});
                 this.props.dispatch(addMessage(data));
             }.bind(this),
             error: function (xhr, status, err) {
@@ -34,7 +29,6 @@ var MessageBoard = React.createClass({
             data: message,
             success: function (data) {
                 this.props.dispatch(addMessage(data));
-                //this.setState({data: data});
             }.bind(this),
             error: function (xhr, status, err) {
                 console.log(this.props.url, status, err.toString());

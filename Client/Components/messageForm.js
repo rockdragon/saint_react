@@ -1,24 +1,20 @@
 import React from 'react'
+import { findDOMNode } from 'react-dom'
+
 var MessageForm = React.createClass({
-    getInitialState: function () {
-        return {name: '', message: ''};
-    },
-    handleNameChange: function (e) {
-        this.setState({name: e.target.value})
-    },
-    handleMessageChange: function (e) {
-        this.setState({message: e.target.value})
-    },
     handleSubmit: function (e) {
         e.preventDefault();
-        var name = this.state.name.trim();
-        var message = this.state.message.trim();
+        const inputName = findDOMNode(this.refs.inputName);
+        const inputMessage = findDOMNode(this.refs.inputMessage);
+        var name = inputName.value.trim();
+        var message = inputMessage.value.trim();
         if (!name || !message) {
             return;
         }
         //reversed delivery
         this.props.onMessageSubmit({name: name, message: message});
-        this.setState({name: '', message: ''});
+        inputName.value = '';
+        inputMessage.value = '';
     },
     render: function () {
         return (
@@ -38,9 +34,7 @@ var MessageForm = React.createClass({
                                     <input
                                         type="text"
                                         placeholder="Your name"
-                                        value={this.state.name}
-                                        onChange={this.handleNameChange}
-                                        id="textName"
+                                        ref="inputName"
                                         className="form-control"
                                     />
                                 </div>
@@ -57,9 +51,7 @@ var MessageForm = React.createClass({
                                     <input
                                         type="text"
                                         placeholder="Say something..."
-                                        value={this.state.message}
-                                        onChange={this.handleMessageChange}
-                                        id="textMessage"
+                                        ref="inputMessage"
                                         className="form-control"
                                     />
                                 </div>
