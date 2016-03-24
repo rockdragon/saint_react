@@ -10,7 +10,7 @@ function messages(state={}, action) {
     }
 }
 
-const messageApp = combineReducers({
+const reducers = combineReducers({
     messages
 });
-export default messageApp;
+export default reducers;

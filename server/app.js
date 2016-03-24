@@ -25,6 +25,8 @@ var routes = require('./routes/index');
 var api = require('./routes/api');
 
 app.use('/', routes);
+app.use('/messages', routes);
+app.use('/form', routes);
 app.use('/api', api);
 
 // catch 404 and forward to error handler
