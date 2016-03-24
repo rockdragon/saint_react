@@ -12,6 +12,9 @@ const Container = React.createClass({
             title: '留言板'
         }
     },
+    createElement: function(component, props) {
+        console.log(arguments)
+    },
     componentDidMount: function () {
         $.ajax({
             url: this.props.url,

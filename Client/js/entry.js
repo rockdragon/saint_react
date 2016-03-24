@@ -14,6 +14,7 @@ import { Router, Route, IndexRoute, browserHistory } from 'react-router'
 let store = createStore(reducers);
 let rootElement = document.getElementById('container');
 
+
 render(
     <Provider store={store}>
         <Router history={browserHistory}>
