@@ -1,5 +1,5 @@
 import { combineReducers } from 'redux'
-import { addMessage, ADD_MESSAGE } from './actions';
+import { ADD_MESSAGE } from './actions';
 
 function messages(state={}, action) {
     switch(action.type){
