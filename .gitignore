@@ -30,4 +30,4 @@ assets
 node_modules
 
 .DS_Store/
-.idea
+.DS_Store

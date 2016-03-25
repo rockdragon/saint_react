@@ -44,12 +44,7 @@ const Container = React.createClass({
         });
     },
     render: function () {
-        const {title, messages, children, location} = this.props;
-        var props = undefined;
-        if(location.pathname === '/form')
-            props = {onMessageSubmit: this.handleMessageSubmit};
-        else if(location.pathname === '/messages')
-            props = {data: messages};
+        const {title, children, childrenProps} = this.props;
         return (
             <div className="container-fluid">
                 <NavBar />
@@ -63,11 +58,7 @@ const Container = React.createClass({
                             </div>
                         </div>
                         <div className="row mt10"></div>
-                        {
-                            props
-                                ? React.cloneElement(children, props)
-                                : children
-                        }
+                        { React.cloneElement(children, childrenProps) }
                     </div>
                     <div className="col-md-4">
                     </div>
@@ -77,12 +68,18 @@ const Container = React.createClass({
     }
 });
 
-function select(state) {
+function mapStateToProps(state, ownProps) {
+    let pathname = ownProps.location.pathname;
+    let childrenProps = {};
+    if(pathname === '/form')
+        childrenProps = {onMessageSubmit: this.handleMessageSubmit};
+    else if(pathname === '/messages')
+        childrenProps = {data: state.messages};
     return {
-        messages: state.messages
+        childrenProps: childrenProps
     };
 }
-export default connect(select)(Container);
+export default connect(mapStateToProps)(Container);
 
 //export default Container;
 //<MessageBoard url='/api/message' title='留言板'/>

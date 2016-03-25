@@ -1,5 +1,6 @@
 import { combineReducers } from 'redux'
 import { ADD_MESSAGE } from './actions';
+import { routerReducer } from 'react-router-redux'
 
 function messages(state={}, action) {
     switch(action.type){
@@ -11,6 +12,7 @@ function messages(state={}, action) {
 }
 
 const reducers = combineReducers({
-    messages
+    messages,
+    routing: routerReducer
 });
 export default reducers;
