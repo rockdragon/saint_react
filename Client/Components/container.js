@@ -6,6 +6,7 @@ import {receiveMessages} from '../flux/actions'
 import NavBar from '../components/navBar'
 import MessageList from '../components/messageList'
 import MessageForm from '../components/messageForm'
+import Default from '../components/default'
 
 const Container = React.createClass({
     getDefaultProps: function () {
@@ -44,12 +45,11 @@ const Container = React.createClass({
     },
     render: function () {
         const {title, children, messages, pathname} = this.props;
-        var Child = children, Props;
+        var Child = Default, Props;
         if(pathname === '/messages') {
             Child = MessageList;
             Props = {data: messages};
-        }
-        else if(pathname === '/form'){
+        } else if(pathname === '/form'){
             Child = MessageForm;
             Props = {onMessageSubmit: this.handleMessageSubmit};
         }
