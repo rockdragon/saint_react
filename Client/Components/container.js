@@ -4,6 +4,8 @@ import {createStore} from 'redux'
 
 import {receiveMessages} from '../flux/actions'
 import NavBar from '../components/navBar'
+import MessageList from '../components/messageList'
+import MessageForm from '../components/messageForm'
 
 const Container = React.createClass({
     getDefaultProps: function () {
@@ -11,9 +13,6 @@ const Container = React.createClass({
             url: '/api/message',
             title: '留言板'
         }
-    },
-    createElement: function(component, props) {
-        console.log(arguments)
     },
     componentDidMount: function () {
         $.ajax({
@@ -44,7 +43,17 @@ const Container = React.createClass({
         });
     },
     render: function () {
-        const {title, children, childrenProps} = this.props;
+        const {title, children, messages, pathname} = this.props;
+        var Child = children, Props;
+        if(pathname === '/messages') {
+            Child = MessageList;
+            Props = {data: messages};
+        }
+        else if(pathname === '/form'){
+            Child = MessageForm;
+            Props = {onMessageSubmit: this.handleMessageSubmit};
+        }
+
         return (
             <div className="container-fluid">
                 <NavBar />
@@ -58,7 +67,7 @@ const Container = React.createClass({
                             </div>
                         </div>
                         <div className="row mt10"></div>
-                        { React.cloneElement(children, childrenProps) }
+                        <Child {...Props} />
                     </div>
                     <div className="col-md-4">
                     </div>
@@ -70,13 +79,9 @@ const Container = React.createClass({
 
 function mapStateToProps(state, ownProps) {
     let pathname = ownProps.location.pathname;
-    let childrenProps = {};
-    if(pathname === '/form')
-        childrenProps = {onMessageSubmit: this.handleMessageSubmit};
-    else if(pathname === '/messages')
-        childrenProps = {data: state.messages};
     return {
-        childrenProps: childrenProps
+        messages: state.messages,
+        pathname
     };
 }
 export default connect(mapStateToProps)(Container);
