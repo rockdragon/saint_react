@@ -45,12 +45,10 @@ const Container = React.createClass({
     },
     render: function () {
         const {title, children, messages, pathname} = this.props;
-        var Child = Default, Props;
+        var Props;
         if(pathname === '/messages') {
-            Child = MessageList;
             Props = {data: messages};
         } else if(pathname === '/form'){
-            Child = MessageForm;
             Props = {onMessageSubmit: this.handleMessageSubmit};
         }
 
@@ -67,7 +65,11 @@ const Container = React.createClass({
                             </div>
                         </div>
                         <div className="row mt10"></div>
-                        <Child {...Props} />
+                        {
+                            Props
+                                ? React.cloneElement(children, Props)
+                                : children
+                        }
                     </div>
                     <div className="col-md-4">
                     </div>
