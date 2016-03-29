@@ -45,7 +45,7 @@ const Container = React.createClass({
     },
     render: function () {
         const {title, children, messages, pathname} = this.props;
-        var Props;
+        let Props;
         if(pathname === '/messages') {
             Props = {data: messages};
         } else if(pathname === '/form'){
