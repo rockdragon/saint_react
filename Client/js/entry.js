@@ -11,6 +11,8 @@ import Default from '../components/default'
 import MessageList from '../components/messageList'
 import MessageForm from '../components/messageForm'
 
+import 'weui/dist/style/weui.min.css'
+
 let store = createStore(reducers);
 let rootElement = document.getElementById('container');
 
